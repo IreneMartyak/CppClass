@@ -1,10 +1,43 @@
 #include <iostream>
 #include <stack>
-#include <bitset>
+#include <vector>
 // Age of empires 1
 
 enum class CAMPAIGN { STANDART, ASCENT_OF_EGIPT_CP0, ASCENT_OF_EGIPT_CP1, ASCENT_OF_EGIPT_CP7 };
+class Base_Building
+{
+public:
+     std::string _name;
+};
 
+class Builder
+{
+public:
+     std::string _id;
+};
+class Market
+{
+public:
+     std::string _name;
+};
+class Baracs
+{
+public:
+     std::string _name;
+};
+
+class Campain
+{
+     Base_Building *_base_building;
+     std::vector<Builder> *_builders;
+     Market *_market;
+     Baracs *_baracs;
+public:
+     Base_Building* get_base_building(){}
+     Builder* get_builders(){ }
+     Market* get_market(){}
+     Baracs* get_baracs(){}
+};
 class Builder
 {
 
@@ -20,7 +53,7 @@ public:
 class Builder_Greek_style_campain : public Builder
 {
      
-     //Builder_Greek_style_campain *self = nullptr;
+     //Campain *campagn = nullptr;
 public:
      //void reset(){}
      int number_of_workers{};
@@ -33,7 +66,7 @@ public:
 
 class Builder_Egyptian_style_campain : public Builder
 {
-     Builder_Egyptian_style_campain *self = nullptr;
+     Campain *campagn = nullptr;
 public:
      //void reset(){}
      void createBaseBuilding() override {std::cout << "Creating town center with obelisk" << std::endl;}
@@ -45,7 +78,7 @@ public:
 
 class Builder_Mesopotamian_style_campain : public Builder
 {
-     Builder_Mesopotamian_style_campain *self = nullptr;
+     Campain *campagn = nullptr;
 public:
      //void reset(){}// Actually constructor
      void createBaseBuilding() override {std::cout << "Creating Ziggurat" << std::endl;}
