@@ -22,7 +22,7 @@ public:
 };
 
 // Leaf Component: Checksum
-class Checksum : public PacketComponent {
+class Checksum : public PacketComponent { // only have this
 public:
     void display() const override { std::cout << "Checksum (Integrity Check)\n"; }
 };
@@ -30,10 +30,10 @@ public:
 // Composite Component: TCP Packet
 class TCPPacket : public PacketComponent {
 private:
-    std::vector<std::shared_ptr<PacketComponent>> components_;
+    std::vector<std::shared_ptr<PacketComponent>> components_; // has this + other
     
 public:
-    void addComponent(std::shared_ptr<PacketComponent> component) {
+    void addComponent(std::shared_ptr<PacketComponent>&& component) {
         components_.push_back(component);
     }
     
@@ -49,13 +49,13 @@ int main() {
     // Create individual components
     auto header = std::make_shared<TCPHeader>();
     auto payload = std::make_shared<Payload>();
-    auto checksum = std::make_shared<Checksum>();
+    //auto checksum = std::make_shared<Checksum>();
     
     // Create a composite TCP Packet
     TCPPacket tcpPacket;
     tcpPacket.addComponent(header);
     tcpPacket.addComponent(payload);
-    tcpPacket.addComponent(checksum);
+    tcpPacket.addComponent(std::make_shared<Checksum>());
     
     // Display the composition of the TCP Packet
     tcpPacket.display();

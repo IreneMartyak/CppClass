@@ -72,6 +72,7 @@ public:
     void log(const T& message) const override {
         std::cout << "[Request ID: 12345] ";
         logger_->log(message);
+        std::cout << " ****** ";
     }
 };
 
@@ -86,7 +87,8 @@ int main() {
     
 
     // Log a message with all decorators applied
-    requestContextLogger->log("API request received");
+    requestContextLogger->log("API request received"); // RequestContextLogger( Final message)(Functionality)->AuthLogger( Final message)(Functionality)->timestampedLogger(Final message)(Functionality)->BasicLogger(Final message)
 
     return 0;
 }
+// basicLogger <-  timestampedLogger <- authLogger <- requestContextLogger.log

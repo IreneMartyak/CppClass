@@ -1,8 +1,10 @@
-#include <memory>               // For std::shared_ptr
-#include <boost/shared_ptr.hpp> // For boost::shared_ptr
 #include <boost/make_shared.hpp>
+#include <boost/shared_ptr.hpp> // For boost::shared_ptr
+#include <cstdint>
 #include <iostream>
+#include <memory>               // For std::shared_ptr
 #include <type_traits>
+#include <vector>
 
 
 
@@ -75,7 +77,7 @@ class Object_Factory_lmplementation //: public ObjectFactory
 };
 
 
-template<typename Underlying_type_t>
+template<typename Underlying_type_t> // Adapter = Simple Wraper
 class Smart_pointer_factory_adapter
 {
 public:
@@ -104,11 +106,12 @@ int main()
     // but i want a boost pointer to handle my object :( or std im so unsure !!
     Smart_pointer_factory_adapter<Product> adapter;
 
+    
     boost::shared_ptr<Product> what_i_want  = adapter.make_shared(factory_object->create_object(Catalog::HELICOPTER));
     std::cout << what_i_want->get_name() << "\n";
 
     return 0;
 }
-
+std::vector<int> v;
 //  https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2003/n1450.html
 //  A Proposal to Add General Purpose Smart Pointers to the Library Technical Report
